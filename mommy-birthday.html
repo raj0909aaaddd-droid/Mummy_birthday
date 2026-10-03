@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>To My First Home, My Mommy</title>
+<meta name="theme-color" content="#f6e6cc">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@400;500;600&family=Caveat:wght@500;600&family=Inter:wght@300;400&display=swap">
+<style>
+:root{--ivory:#fbf5e9;--cream:#f4ead6;--gold:#c9a45c;--blush:#f3dcd2;--beige:#e8d9bd;--brown:#4a3426;--sky:#d6e6ef;
+--serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;--hand:'Caveat','Segoe Print','Bradley Hand',cursive;--sans:'Inter',system-ui,sans-serif;--px:0px;--py:0px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--ivory);color:var(--brown);font-family:var(--serif);overflow-x:hidden;line-height:1.6}
+body.lock{overflow:hidden;height:100svh}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+#grain{position:fixed;inset:0;z-index:50;pointer-events:none;opacity:.09;mix-blend-mode:multiply;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+#dust{position:fixed;inset:0;width:100%;height:100%;z-index:40;pointer-events:none}
+#music{position:fixed;top:max(14px,env(safe-area-inset-top));right:14px;z-index:60;width:48px;height:48px;border-radius:50%;
+background:rgba(251,245,233,.75);border:1px solid rgba(201,164,92,.6);backdrop-filter:blur(6px);font-size:20px;color:var(--gold);display:grid;place-items:center;transition:.4s}
+#music.on{box-shadow:0 0 0 6px rgba(201,164,92,.18),0 0 24px rgba(201,164,92,.5)}
+#music.on::after{content:"";position:absolute;width:2px;height:30px;background:var(--gold);transform:rotate(-45deg);opacity:0}
+#music:not(.on)::after{opacity:.8}
+
+/* clouds */
+.clouds{position:absolute;inset:0;overflow:hidden;pointer-events:none;transform:translate3d(var(--px),var(--py),0);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.cloud{position:absolute;left:0;width:440px;height:160px;will-change:transform;filter:blur(7px);
+background:radial-gradient(closest-side,#fff,transparent 72%) 0 100%/55% 90% no-repeat,radial-gradient(closest-side,#fffdf8,transparent 74%) 50% 0/62% 100% no-repeat,radial-gradient(closest-side,#fff,transparent 72%) 100% 100%/55% 90% no-repeat;
+animation:drift linear infinite}
+@keyframes drift{from{transform:translate3d(-110%,0,0) scale(var(--s))}to{transform:translate3d(calc(100vw + 10%),0,0) scale(var(--s))}}
+
+section,header{position:relative;overflow:hidden}
+.wrap{position:relative;z-index:5;max-width:640px;margin:0 auto;padding:0 22px}
+
+/* hero */
+#hero{min-height:100svh;display:grid;place-items:center;text-align:center;
+background:radial-gradient(ellipse 120% 70% at 50% 100%,#ffd990 0%,#f9d0a0 28%,#f3e2d3 58%,#d6e6ef 100%)}
+#hero .sun{position:absolute;left:50%;bottom:-18vh;width:120vmax;height:120vmax;transform:translateX(-50%);border-radius:50%;
+background:radial-gradient(circle,rgba(255,236,180,.9) 0,rgba(255,214,140,.35) 22%,transparent 45%);animation:rise 9s ease-out both,breathe 8s ease-in-out 9s infinite}
+@keyframes rise{from{transform:translate(-50%,40vh);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+@keyframes breathe{50%{transform:translate(-50%,-2vh) scale(1.04)}}
+#hero h1{font-weight:500;font-style:italic;font-size:clamp(2rem,8.4vw,3.6rem);line-height:1.25;text-shadow:0 2px 30px rgba(255,248,230,.9)}
+#hero h1 span{display:block;opacity:0;transform:translateY(14px);animation:up 2.4s ease-out forwards}
+#hero h1 span:nth-child(1){animation-delay:1.2s}#hero h1 span:nth-child(2){animation-delay:2.8s}
+.small{font-family:var(--sans);font-weight:300;font-size:.8rem;letter-spacing:.14em;margin-top:2rem;opacity:0;animation:up 2s ease-out 4.6s forwards}
+@keyframes up{to{opacity:1;transform:none}}
+.btn{margin-top:2.4rem;min-height:54px;padding:0 30px;border-radius:40px;border:1px solid var(--gold);background:rgba(255,250,238,.7);font-size:1.25rem;font-style:italic;
+box-shadow:0 8px 30px rgba(201,164,92,.28),inset 0 0 0 4px rgba(255,255,255,.4);opacity:0;pointer-events:none;transition:opacity 1.6s,transform .3s}
+.btn.show{opacity:1;pointer-events:auto}.btn:active{transform:scale(.97)}
+#veil{position:fixed;inset:0;z-index:70;pointer-events:none;opacity:0;transition:opacity 1.1s ease;
+background:radial-gradient(circle at 30% 40%,#fff 0,transparent 55%),radial-gradient(circle at 75% 60%,#fffaf0 0,transparent 55%),#fbf3e3}
+#veil.on{opacity:1}
+
+/* shared */
+h2{font-weight:500;font-size:clamp(1.9rem,7vw,3rem);line-height:1.2;text-align:center}
+.hand{font-family:var(--hand);font-weight:500;color:#7a5638}
+.rv{opacity:0;transform:translateY(18px);transition:opacity 1.6s ease,transform 1.6s ease}
+.rv.in{opacity:1;transform:none}
+.paper{background:linear-gradient(180deg,rgba(255,252,244,.98),rgba(250,241,223,.98));border-radius:6px;padding:34px 26px;
+box-shadow:0 1px 0 #fff inset,0 30px 60px -20px rgba(120,84,40,.35),0 0 0 1px rgba(201,164,92,.25);position:relative}
+.paper::before{content:"";position:absolute;inset:8px;border:1px solid rgba(201,164,92,.45);border-radius:3px;pointer-events:none}
+
+/* s1 */
+#s1{padding:20vh 0 18vh;background:linear-gradient(180deg,#d6e6ef 0,#f3e9dc 22%,var(--ivory) 60%,var(--cream))}
+#s1 .paper{margin-top:2.6rem;animation:float 9s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px)}}
+#s1 p.body{font-size:1.28rem;line-height:1.85}
+.note{display:block;margin-top:1.8rem;font-size:1.7rem;line-height:1.3;text-align:right;transform:rotate(-2deg)}
+
+/* s2 */
+#s2{padding:14vh 0;background:linear-gradient(180deg,var(--cream),#efe2cc 50%,var(--cream))}
+.sub{font-family:var(--sans);font-weight:300;font-size:.82rem;letter-spacing:.08em;text-align:center;margin:1rem 0 2.4rem;opacity:.75}
+.mem{display:block;width:100%;margin:0 auto 22px;position:relative;min-height:128px}
+.mem .face,.mem .open{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:26px 34px;transition:opacity .7s,transform .7s}
+.mem .face{font-size:1.2rem;font-style:italic;line-height:1.4;background:
+radial-gradient(closest-side,#fff,transparent 74%) 4% 100%/40% 80% no-repeat,radial-gradient(closest-side,#fffdf8,transparent 74%) 50% 0/60% 110% no-repeat,radial-gradient(closest-side,#fff,transparent 74%) 96% 100%/40% 80% no-repeat,radial-gradient(ellipse,#fffaf0,#fff6e6 60%,transparent 72%) 50% 60%/92% 80% no-repeat;
+filter:drop-shadow(0 12px 18px rgba(150,110,60,.2))}
+.mem:nth-child(even){width:92%;margin-left:auto}.mem:nth-child(odd){width:94%}
+.mem .face{animation:float 7s ease-in-out infinite}.mem:nth-child(2) .face{animation-delay:-2s}.mem:nth-child(3) .face{animation-delay:-4s}
+.mem .open{opacity:0;transform:scale(.92);pointer-events:none;border-radius:6px;font-family:var(--hand);font-size:1.5rem;line-height:1.35;color:#5d412c;
+background:#fff8e9;box-shadow:0 0 0 1px rgba(201,164,92,.5),0 0 40px rgba(232,190,100,.55),0 20px 40px -18px rgba(120,84,40,.4);padding:20px 24px}
+.mem[aria-expanded=true]{min-height:190px}
+.mem[aria-expanded=true] .face{opacity:0;transform:scale(1.06)}
+.mem[aria-expanded=true] .open{opacity:1;transform:none}
+
+/* s3 */
+#s3{padding:14vh 0 16vh;background:linear-gradient(180deg,var(--cream),var(--ivory) 20%,var(--ivory) 80%,#efe0c6)}
+.letter{margin-top:2.4rem;padding:40px 24px}
+.letter p{font-family:var(--hand);font-size:clamp(1.45rem,5.2vw,1.75rem);line-height:1.5;margin-bottom:1.1rem;color:#5a3d29}
+.closing{font-size:1.9rem!important;margin-top:2rem;line-height:1.4!important}
+.sig{display:inline-block;font-size:2.4rem!important;color:var(--gold)!important;clip-path:inset(0 100% 0 0);transition:clip-path 2.6s ease .4s}
+.sig.in{clip-path:inset(0 -10% 0 0)}
+
+/* s4 */
+#bridge{height:55vh;background:linear-gradient(180deg,#efe0c6,#b9a4a6 30%,#4b4a78 62%,#0d1230)}
+#s4{min-height:110svh;padding:8vh 0 12vh;color:#f5ecd8;background:linear-gradient(180deg,#0d1230,#0a0e26 55%,#171436);text-align:center}
+#s4 h2{color:#fdf1d2;text-shadow:0 0 30px rgba(255,220,150,.4)}
+#s4 .sub{color:#f5ecd8}
+#sky{position:absolute;inset:0}
+.tiny{position:absolute;border-radius:50%;background:#fff6dc;animation:tw 4s ease-in-out infinite}
+@keyframes tw{50%{opacity:.15;transform:scale(.6)}}
+.star{position:absolute;width:56px;height:56px;margin:-28px 0 0 -28px;z-index:6;border-radius:50%;display:grid;place-items:center}
+.star i{width:18px;height:18px;background:#fff3c8;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);filter:drop-shadow(0 0 8px #ffd98a) drop-shadow(0 0 18px #ffd98a);animation:pulse 3s ease-in-out infinite;transition:.5s}
+.star:nth-child(2n) i{animation-delay:-1s}.star:nth-child(3n) i{animation-delay:-2s}
+@keyframes pulse{50%{transform:scale(1.5) rotate(20deg)}}
+.star.seen i{background:var(--gold);transform:scale(1.2);animation:none}
+#stars{position:relative;height:56svh;max-width:640px;margin:2rem auto 0}
+#wish{position:relative;z-index:6;min-height:7.5rem;max-width:520px;margin:0 auto;padding:0 26px;font-size:1.6rem;font-style:italic;line-height:1.45;color:#fdf1d2;transition:opacity .8s}
+#count{font-family:var(--sans);font-weight:300;font-size:.75rem;letter-spacing:.12em;opacity:.7;margin-top:.8rem}
+
+/* s5 */
+#s5{min-height:100svh;display:grid;place-items:center;text-align:center;padding:16vh 0;
+background:linear-gradient(180deg,#171436 0,#5b4a6a 18%,#d08e6c 45%,#f6c98a 70%,#fbe6b8 100%)}
+#s5 h2{font-size:clamp(2.3rem,9.5vw,4rem);color:#3d2616;text-shadow:0 0 40px rgba(255,236,190,.8)}
+#s5 p{font-size:1.35rem;line-height:1.8;margin-top:2rem;color:#3d2616}
+#s5 .glow{position:absolute;left:50%;bottom:-30vh;width:140vmax;height:90vmax;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(255,240,190,.95),rgba(255,214,140,.3) 35%,transparent 60%)}
+.line{width:90px;height:1px;margin:2rem auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+
+/* final */
+#fin{min-height:100svh;display:grid;place-items:center;text-align:center;padding:14vh 0;
+background:linear-gradient(180deg,#fbe6b8 0,#f6e4cf 22%,#e9eff2 70%,#d6e6ef)}
+#fin .beam{position:absolute;top:-10%;left:50%;width:60vmax;height:130%;transform:translateX(-50%) rotate(8deg);transform-origin:top;
+background:linear-gradient(180deg,rgba(255,236,170,.85),rgba(255,236,170,.2) 60%,transparent);clip-path:polygon(44% 0,56% 0,100% 100%,0 100%);filter:blur(14px);animation:sway 12s ease-in-out infinite alternate}
+@keyframes sway{to{transform:translateX(-50%) rotate(-6deg)}}
+#fin h2{font-size:clamp(2.2rem,8.5vw,3.6rem);font-style:italic}
+#fin .thanks{font-size:1.4rem;line-height:1.9;margin:2rem 0}
+#fin .big{font-size:clamp(2rem,8vw,3.3rem);font-weight:600;line-height:1.2}
+#fin .made{display:block;margin-top:2.4rem;font-size:1.7rem}
+
+@media(min-width:760px){.wrap{max-width:720px}.paper{padding:56px 60px}.letter{padding:60px}#s1 p.body{font-size:1.4rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+.rv,#hero h1 span,.small{opacity:1;transform:none}.sig{clip-path:none}.btn{opacity:1;pointer-events:auto}}
+</style>
+</head>
+<body class="lock">
+<div id="grain"></div><canvas id="dust"></canvas><div id="veil"></div>
+<button id="music" aria-label="Turn gentle music on" aria-pressed="false">♪</button>
+
+<header id="hero">
+  <div class="sun"></div>
+  <div class="clouds" data-n="7"></div>
+  <div class="wrap">
+    <h1><span>Before the world knew me,</span><span>you were already my home.</span></h1>
+    <p class="small">Happy Birthday, Mommy.</p>
+    <button class="btn" id="enter">Enter My Little Letter ☁️</button>
+  </div>
+</header>
+
+<section id="s1">
+  <div class="clouds" data-n="5" data-soft></div>
+  <div class="wrap">
+    <h2 class="rv">For the woman who made my world feel safe.</h2>
+    <div class="paper rv">
+      <p class="body">A mother's love rarely announces itself. It is in the meal made while you were tired, in the light left on until everyone is home, in the worry you swallowed so the rest of us could sleep. You have done a thousand small things nobody thanked you for, because you never did them to be thanked. You were patient when I was difficult, steady when things were uncertain, and somehow always close when I needed you, even on the days I didn't say so. I'm only now beginning to understand how much of my safety was something you built, quietly, one ordinary day at a time.</p>
+      <span class="note hand">Some things can never be repaid.<br>They can only be loved.</span>
+    </div>
+  </div>
+</section>
+
+<section id="s2">
+  <div class="wrap">
+    <h2 class="rv">Things I'll Never Forget</h2>
+    <p class="sub rv">Tap a cloud to open a memory</p>
+    <div id="mems"></div>
+  </div>
+</section>
+
+<section id="s3">
+  <div class="wrap">
+    <div class="paper letter">
+      <h2 class="rv" style="margin-bottom:2rem">If I Could Give You One Thing…</h2>
+      <div id="letter">
+        <p class="rv">Mommy,</p>
+        <p class="rv">I've started this letter so many times, and each time I stop, because nothing I write feels big enough. So I'll just say it plainly, the way I wish I said it more often.</p>
+        <p class="rv">Thank you for raising me. Thank you for every night you stayed up, every meal you made while exhausted, and every time you put yourself last so I could come first. You protected me from things I never even knew were there, and I think I'm only now seeing how much you carried on your own.</p>
+        <p class="rv">Thank you for believing in me, even when I gave you very little reason to. There were days I doubted myself completely, and your faith never moved. I don't think you know how many times that was the only thing holding me up.</p>
+        <p class="rv">I'm sorry, too. I'm sorry for the times I snapped, for the times I was careless with your feelings, for the times I disappointed you and was too proud to say sorry. I never meant to hurt you. I hope you know that.</p>
+        <p class="rv">I may not always say it out loud, but I notice everything. I notice when you're tired. I notice what you do for all of us without being asked. I notice, and I'm grateful, even on the days I forget to show it.</p>
+        <p class="rv">I hope I can make you proud. That's the quiet wish behind most of what I do. And someday I want to give you a beautiful life, a calm, comfortable, happy one, where you finally get to rest and be the one who is looked after.</p>
+        <p class="rv">No matter how old I get, I will always be your child. Taller, maybe, and busier, but still yours.</p>
+        <p class="rv closing">I love you, Mommy.<br>More than I know how to explain.</p>
+        <p class="sig" id="sig">Your son, Raj ♡</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="bridge"></div>
+<section id="s4">
+  <div id="sky"></div>
+  <div class="wrap">
+    <h2 class="rv">My Wishes For You</h2>
+    <p class="sub rv">Touch a star</p>
+  </div>
+  <div id="stars"></div>
+  <p id="wish" aria-live="polite"></p>
+  <p id="count" aria-live="polite"></p>
+</section>
+
+<section id="s5">
+  <div class="glow"></div>
+  <div class="wrap">
+    <h2 class="rv">One day, I'll give you the life you deserve.</h2>
+    <div class="line"></div>
+    <p class="rv">I know I can't repay everything you've done for me. I don't want to make a promise with big words. I just want to keep growing, keep trying, and someday give you reasons to look at me and smile proudly.</p>
+  </div>
+</section>
+
+<section id="fin">
+  <div class="beam"></div>
+  <div class="clouds" data-n="6"></div>
+  <div class="wrap">
+    <h2 class="rv">Happy Birthday, Mommy.</h2>
+    <p class="thanks rv">Thank you for being my first home,<br>my safest place,<br>and one of the greatest blessings of my life.</p>
+    <p class="big rv">I love you, Mommy. Forever.</p>
+    <span class="made hand rv">Made with all my heart ♡</span>
+  </div>
+</section>
+
+<script>
+(function(){
+var $=function(s,r){return(r||document).querySelector(s)},rm=matchMedia('(prefers-reduced-motion:reduce)').matches,
+small=innerWidth<700;
+
+/* clouds */
+document.querySelectorAll('.clouds').forEach(function(c){
+  var n=+c.dataset.n,soft=c.hasAttribute('data-soft');
+  for(var i=0;i<n;i++){
+    var d=document.createElement('div');d.className='cloud';
+    var dur=rm?0:70+Math.random()*70;
+    d.style.cssText='top:'+(i*(88/n)+Math.random()*8)+'%;--s:'+(.6+Math.random()*1)+';opacity:'+(soft?.5:.55+Math.random()*.4)+
+    ';animation-duration:'+dur+'s;animation-delay:-'+(Math.random()*dur)+'s';
+    if(rm)d.style.left=(Math.random()*70)+'%';
+    c.appendChild(d);
+  }
+});
+
+/* dust */
+var cv=$('#dust'),cx=cv.getContext('2d'),W,H,P=[];
+function size(){var r=Math.min(devicePixelRatio||1,2);W=cv.width=innerWidth*r;H=cv.height=innerHeight*r;}
+size();addEventListener('resize',size);
+for(var i=0;i<(small?28:50);i++)P.push({x:Math.random(),y:Math.random(),r:Math.random()*1.8+.6,vx:(Math.random()-.3)*.00008,vy:-Math.random()*.00012-.00003,a:Math.random()*6});
+function dust(t){
+  cx.clearRect(0,0,W,H);
+  P.forEach(function(p){
+    if(!rm){p.x+=p.vx*16;p.y+=p.vy*16;if(p.y<-.05){p.y=1.05;p.x=Math.random()}if(p.x<-.05)p.x=1.05;if(p.x>1.05)p.x=-.05}
+    var o=.35+.35*Math.sin(t/1500+p.a);
+    cx.beginPath();cx.fillStyle='rgba(235,200,120,'+o+')';cx.arc(p.x*W,p.y*H,p.r*(W/innerWidth),0,7);cx.fill();
+  });
+  if(!rm&&!document.hidden)requestAnimationFrame(dust);
+}
+requestAnimationFrame(dust);
+document.addEventListener('visibilitychange',function(){if(!document.hidden&&!rm)requestAnimationFrame(dust)});
+
+/* parallax */
+function par(x,y){var nx=x/innerWidth-.5,ny=y/innerHeight-.5;document.documentElement.style.setProperty('--px',(nx*-28)+'px');document.documentElement.style.setProperty('--py',(ny*-16)+'px')}
+if(!rm){addEventListener('pointermove',function(e){par(e.clientX,e.clientY)},{passive:true});
+addEventListener('deviceorientation',function(e){if(e.gamma!=null)par(innerWidth*(.5+e.gamma/120),innerHeight*(.5+(e.beta-45)/120))},{passive:true})}
+
+/* reveal */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.25,rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('.rv,.sig').forEach(function(el){io.observe(el)});
+
+/* enter */
+var enter=$('#enter'),veil=$('#veil');
+setTimeout(function(){enter.classList.add('show')},rm?0:6200);
+enter.addEventListener('click',function(){
+  veil.classList.add('on');
+  setTimeout(function(){
+    document.body.classList.remove('lock');
+    document.documentElement.style.scrollBehavior='auto';
+    $('#s1').scrollIntoView();
+    document.documentElement.style.scrollBehavior='';
+    veil.classList.remove('on');
+  },1200);
+});
+
+/* memories */
+var M=[
+['The times you stayed awake when I was sick.','I never understood how tired you must have been. I only knew that when you were beside me, I was going to be okay.'],
+['The meals that somehow always tasted like home.','It was never only the food. It was you, making sure I was cared for before I even felt hungry.'],
+["The moments you believed in me when I didn't believe in myself.",'You saw something in me long before I could. I am still trying to become the person you always thought I was.'],
+['Every little sacrifice you made without asking for anything back.','You never kept count. I did, quietly, and I am grateful for every one of them.'],
+['The ordinary days that became my favourite memories.','Nothing special happened, and that is exactly why I treasure them. You made the plain days feel safe.']];
+var box=$('#mems');
+M.forEach(function(m,i){
+  var b=document.createElement('button');b.className='mem rv';b.setAttribute('aria-expanded','false');
+  b.innerHTML='<span class="face"></span><span class="open"></span>';
+  b.firstChild.textContent=m[0];b.lastChild.textContent=m[1];
+  b.addEventListener('click',function(){b.setAttribute('aria-expanded',b.getAttribute('aria-expanded')!=='true')});
+  box.appendChild(b);io.observe(b);
+});
+
+/* stars */
+var sky=$('#sky'),f=document.createDocumentFragment();
+for(var i=0;i<(small?110:200);i++){
+  var s=document.createElement('span'),z=Math.random()*2+.8;s.className='tiny';
+  s.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;width:'+z+'px;height:'+z+'px;opacity:'+(.3+Math.random()*.7)+';animation-delay:-'+Math.random()*4+'s;animation-duration:'+(3+Math.random()*4)+'s';
+  f.appendChild(s);
+}
+sky.appendChild(f);
+var W5=['May you always have reasons to smile.',"May life return every bit of kindness you've given.","May your heart always feel as loved as you have made mine feel.",'May every year ahead be gentler and happier.',"May I someday give you even a fraction of everything you've given me."],
+pos=[[22,14],[76,26],[34,48],[72,68],[40,88]],seen=0,wish=$('#wish'),cnt=$('#count');
+cnt.textContent='0 of 5 wishes found';
+pos.forEach(function(p,i){
+  var b=document.createElement('button');b.className='star';b.style.left=p[0]+'%';b.style.top=p[1]+'%';
+  b.setAttribute('aria-label','Wish '+(i+1));b.innerHTML='<i></i>';
+  b.addEventListener('click',function(){
+    if(!b.classList.contains('seen')){b.classList.add('seen');seen++;cnt.textContent=seen+' of 5 wishes found'}
+    wish.style.opacity=0;setTimeout(function(){wish.textContent=W5[i];wish.style.opacity=1},350);
+  });
+  $('#stars').appendChild(b);
+});
+
+/* music: soft generated piano-like ambience, off until tapped */
+var ac,mg,timer,on=false,btn=$('#music');
+var N=[261.63,293.66,329.63,392,440,523.25,587.33,659.25],ch=[[130.81,196,261.63],[110,164.81,220],[174.61,261.63,349.23],[98,146.83,196]],ci=0,bt=0;
+function note(f,t,v,d){var o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=f;
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.03);g.gain.exponentialRampToValueAtTime(.0008,t+d);
+  o.connect(g);g.connect(mg);o.start(t);o.stop(t+d+.1)}
+function tick(){
+  var t=ac.currentTime+.05;
+  if(bt%8===0){ch[ci++%4].forEach(function(f){note(f,t,.07,7)})}
+  if(Math.random()<.7)note(N[Math.floor(Math.random()*N.length)],t,.09,3.2);
+  bt++;
+}
+btn.addEventListener('click',function(){
+  try{
+    if(!ac){var C=window.AudioContext||window.webkitAudioContext;ac=new C();mg=ac.createGain();mg.gain.value=0;mg.connect(ac.destination)}
+    on=!on;
+    if(on){ac.resume();mg.gain.cancelScheduledValues(ac.currentTime);mg.gain.linearRampToValueAtTime(.8,ac.currentTime+2);tick();timer=setInterval(tick,1800)}
+    else{mg.gain.cancelScheduledValues(ac.currentTime);mg.gain.linearRampToValueAtTime(0,ac.currentTime+1);clearInterval(timer)}
+    btn.classList.toggle('on',on);btn.setAttribute('aria-pressed',on);
+    btn.setAttribute('aria-label',on?'Turn music off':'Turn gentle music on');
+  }catch(e){}
+});
+})();
+</script>
+</body>
+</html>
